@@ -209,9 +209,9 @@ class _NavItem extends StatelessWidget {
       behavior: HitTestBehavior.opaque,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-        padding: const EdgeInsets.symmetric(vertical: 8),
         child: Column(
           mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             AnimatedContainer(
               duration: const Duration(milliseconds: 200),
@@ -223,11 +223,14 @@ class _NavItem extends StatelessWidget {
               child: Icon(icon, color: selected ? Colors.blue[300] : Colors.white38, size: 24),
             ),
             const SizedBox(height: 2),
-            Text(label,
-                style: TextStyle(
-                    color: selected ? Colors.blue[300] : Colors.white38,
-                    fontSize: 10,
-                    fontWeight: selected ? FontWeight.bold : FontWeight.normal)),
+            Flexible(
+              child: Text(label,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                      color: selected ? Colors.blue[300] : Colors.white38,
+                      fontSize: 10,
+                      fontWeight: selected ? FontWeight.bold : FontWeight.normal)),
+            ),
           ],
         ),
       ),
@@ -245,15 +248,18 @@ class _PlaceholderTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(icon, size: 64, color: Colors.white24),
-          const SizedBox(height: 16),
-          Text(message, style: const TextStyle(color: Colors.white38, fontSize: 16)),
-          const SizedBox(height: 24),
-          const CircularProgressIndicator(color: Colors.blue, strokeWidth: 2),
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(icon, size: 64, color: Colors.white24),
+            const SizedBox(height: 16),
+            Text(message, style: const TextStyle(color: Colors.white38, fontSize: 16)),
+            const SizedBox(height: 24),
+            const CircularProgressIndicator(color: Colors.blue, strokeWidth: 2),
+          ],
+        ),
       ),
     );
   }
@@ -530,7 +536,7 @@ class _HomeTabState extends State<_HomeTab> with TickerProviderStateMixin {
         borderRadius: BorderRadius.circular(20),
         border: Border.all(color: Colors.white.withValues(alpha: 0.2)),
       ),
-      child: Column(children: [
+      child: Column(mainAxisSize: MainAxisSize.min, children: [
         Icon(icon, color: Colors.white70, size: 14),
         const SizedBox(height: 2),
         Text(value, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14)),
@@ -561,7 +567,7 @@ class _HomeTabState extends State<_HomeTab> with TickerProviderStateMixin {
           borderRadius: BorderRadius.circular(18),
           border: Border.all(color: color.withValues(alpha: 0.3)),
         ),
-        child: Column(children: [
+        child: Column(mainAxisSize: MainAxisSize.min, children: [
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(color: color.withValues(alpha: 0.15), shape: BoxShape.circle),
@@ -688,7 +694,7 @@ class _HomeTabState extends State<_HomeTab> with TickerProviderStateMixin {
   }
 
   Widget _sunTimeItem(IconData icon, String label, String time, Color color) {
-    return Column(children: [
+    return Column(mainAxisSize: MainAxisSize.min, children: [
       Icon(icon, color: color, size: 28),
       const SizedBox(height: 6),
       Text(label, style: TextStyle(color: Colors.white.withValues(alpha: 0.55), fontSize: 12)),
